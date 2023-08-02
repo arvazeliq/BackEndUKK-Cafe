@@ -3,9 +3,9 @@ const app = express()
 
 app.use(express.json())
 
-const authController = require(`../controllers/auth-controller`)
+const auth = require(`../middlewares/auth`)
 
-app.post(`/authentication`, authController.authentication)
-app.post(`/authorization`, authController.authorization)
+app.post(`/authentication`, auth.authentication)
+app.post(`/authorization`, auth.authorization)
 
 module.exports = app

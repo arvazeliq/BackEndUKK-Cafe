@@ -3,15 +3,14 @@ const joi = require(`joi`)
 const { Op } = require("sequelize")
 const md5 = require(`md5`)
 
-const validateUser = (input) => {
+const validateUser = async (input) => {
     let rules = joi.object().keys({
         nama_user: joi
             .string()
             .required(),
         role: joi
             .string()
-            .valid(`kasir`, `admin`, `manajer`)
-            .required(),
+            .validate(`kasir`, `admin`, `manajer`),
         username: joi
             .string()
             .required(),

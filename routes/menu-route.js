@@ -2,12 +2,12 @@ const express = require(`express`)
 const app = express()
 
 const menuController = require(`../controllers/menu-controller`)
-const authController = require(`../controllers/auth-controller`)
+const auth = require(`../middlewares/auth`)
 
-app.get(`/menu`, authController.authorization, menuController.getMenu)
-app.post(`/menu`, authController.authorization, menuController.addMenu)
-app.post(`/menu/find`, authController.authorization, menuController.filterMenu)
-app.put(`/menu/:id_menu`, authController.authorization, menuController.updateMenu)
-app.delete(`/menu/:id_menu`, authController.authorization, menuController.deleteMenu)
+app.get(`/menu`, auth.authorization(["admin", "kasir", "manajer"]), menuController.getMenu)
+app.post(`/menu`, auth.authorization(["admin", "kasir", "manajer"]), menuController.addMenu)
+app.post(`/menu/find`, auth.authorization(["admin", "kasir", "manajer"]), menuController.filterMenu)
+app.put(`/menu/:id_menu`, auth.authorization(["admin", "kasir", "manajer"]), menuController.updateMenu)
+app.delete(`/menu/:id_menu`, auth.authorization(["admin", "kasir", "manajer"]), menuController.deleteMenu)
 
 module.exports = app

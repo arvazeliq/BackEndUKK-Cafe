@@ -16,7 +16,6 @@ const validateMeja = async (input) => {
             .details
             .map(item => item.message)
             .join(`,`)
-
         return {
             status: false,
             message: message
@@ -47,7 +46,7 @@ exports.availableMeja = async (request, response) => {
         let meja = await mejaModel.findAll({ where: param })
         return response.json({
             status: true,
-            message: meja
+            data: meja
         })
     } catch (error) {
         return response.json({
